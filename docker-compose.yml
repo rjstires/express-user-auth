@@ -1,0 +1,19 @@
+db:
+    image: postgres
+web:
+    build: .
+    ports:
+    - "3000:3000"
+    volumes:
+    - "./:/usr/src/app/"
+    - "/usr/src/app/node_modules"
+    links:
+    - db
+    environment:
+    - PGHOST=db
+    - PGDATABASE=postgres
+    - PGUSER=postgres
+    - NODE_ENV=development
+    stdin_open: true
+    tty: true
+    command: bash
